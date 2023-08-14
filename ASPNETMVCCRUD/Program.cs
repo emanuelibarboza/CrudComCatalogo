@@ -5,8 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<MVCDemoDbContext>(options => options.UseSqlServer("Data Source=CQI-BNE-844\\SQLEXPRESSMANU;Initial Catalog=Employees;Integrated Security=False;User ID=sa;Password=123456;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False"));
-
+builder.Services.AddDbContext<MVCDemoDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
